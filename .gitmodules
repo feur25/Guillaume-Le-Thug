@@ -1,0 +1,3 @@
+[submodule "groupie tracker/groupie"]
+	path = groupie tracker/groupie
+	url = https://github.com/GuillaumePham/Ynov

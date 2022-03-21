@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <link rel="shortcut icon" href="icone.ico" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/c6d2413c18.js" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>McTracker</title>
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+</head>
+<body>
+    <style>
+        .none{
+            display: none;
+        }
+        .cursor{
+            cursor: pointer;
+            color: gold;
+        }
+        .display_contains {
+            width: 24rem;
+            border-top: white solid 0.5rem;
+            border-right: white solid 0.5rem;
+            border-bottom: white solid 0.5rem;
+            max-width: 500px;
+        }
+        #blue{
+            background-color: rgba(7, 102, 102, 0.568);
+            cursor: pointer;
+        }
+        #api{
+            text-decoration: none;
+            color: beige;
+        }
+        #green{
+            color: greenyellow;
+        }
+        #blue{
+            color: aqua;
+        }
+        #red{
+            color: red;
+        }
+        #orange{
+            color: coral;
+        }
+    </style>
+    <div class="top_bar">
+        <h1>MINECRAFT-TRACER</h1>
+        <p class="text_top">BANG</p>
+        <p class="text_top">ZUT</p>
+        <p class="text_top">UWU</p>
+        <p class="text_top">DANG</p>
+    </div>
+    <div class="index">
+    <i class="fas fa-angle-double-down fa-2x dropdown"></i>
+    <h1>MC TRACKER <i class="fas fa-compass fa-0.5x" ></i></h1>
+    <i class="fas fa-angle-double-down fa-2x dropdown"></i>
+    
+    </div>
+        <div class="search">
+            <p>Nom du joueur:</p>
+            <form action="/" method="post">
+                <input type="text" name="name_player" value=""><input type="submit" id="blue" placeholder="Search" onclick="run()">
+            </form>
+        </div>
+        <div id="all">
+            <div class="display_player">
+                <div class="display_contains">
+                    <img src="https://crafatar.com/avatars/{{.Player.UUID}}" alt="Skin généré par Minecraft-api.com" style="width: 80px; height: 80px;">
+                    <p id="green">Name of player : {{.Player.DisplayName}} </p>
+                    <p id="blue">id : {{.Player.ID}}</p>
+                    <p id="red">UUID : {{.Player.UUID}}</p>
+                    <p id="orange">Statut du joueur : {{.Player.PlayerName}}</p>
+                    <div class="display_contain">
+                        <h1 class="cursor" onclick=open_up()>Friend API Redirection<i class="fa fa-angle-down" aria-hidden="true"></i></h1>
+                        <div id="friends">
+                            {{range .Records}}
+                            <br>
+                            <form action="/" method="get">
+                                <input type="text" name="other" id="characters" value="{{.UUIDReceiver}}"><a href="https://api.hypixel.net/player?key=386e7185-cf0c-4a8b-8d13-6beb3c36fd24&uuid={{.UUIDReceiver}}" id="api"> --> API</a>
+                            </form>
+                            <br>
+                            {{end}}
+                        </div>
+                    </div>
+                </div>
+                <div class="display_containtt">
+                </div>
+            </div>
+        </div>
+</body>
+<script>
+    let count = 0
+    let friend = document.getElementById("friends");
+    friend.classList.add("none");
+    function open_up(){
+        ++count;
+        if (count == 1 ){
+            friend.classList.remove("none");
+        }
+        if (count == 2){
+            friend.classList.add("none");
+            count = 0           
+        }
+    }
+    
+
+</script>
+</html>
